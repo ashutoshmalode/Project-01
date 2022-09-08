@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashu's Fitness</title>
-</head>
+    <title>Tree Management</title>
+
 <link href='https://fonts.googleapis.com/css?family=Baloo Bhai' rel='stylesheet'>
 <link rel="stylesheet" href="css/style.css">
 <style>
@@ -15,7 +15,7 @@
         color: white;
         margin: 0px;
         padding: 0px;
-        background: url('img/bg02.jpg');
+        background: url("https://images8.alphacoders.com/454/454579.jpg");
     }
     .left{
         display: inline;
@@ -77,7 +77,7 @@
     }
     .container{
     border: 2px solid white;
-    margin: 95px 35px;
+    margin: 150px 35px;
     padding: 19px;
     width: 40%;
     border-radius: 25px;
@@ -101,46 +101,101 @@
     width:20% ;
     margin:20px auto;
     }
+    .recovery{
+        font-family: 'Baloo Bhai';
+        margin: 50px 50px;
+        color: rgb(255, 247, 0);
+        /* background-color: black; */
+        padding: 4px 14px;
+        /* border: 2px solid rgb(128, 128, 128); */
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+    }
 
 </style>
+</head>
 <body>
     <header class="header">
         <!-- Left box for logo -->
         <div class="left">
          <div class="left">
-             <img src="img/gym.png" alt="">
-             <div>Ashu Fitness</div>
+             <img src="https://i.pinimg.com/236x/dd/de/21/ddde218ad201bc7092f22b168c287999.jpg" alt="">
+             <div>Tree Management</div>
          </div>
-        </div>
-
-        <!-- mid box for navbar -->
-        <div class="mid">
-            <ul class="navbar">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Fitness Calculator</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
-
-        <!-- Right box for buttons -->
-        <div class="right">
-            <button class="btn">Call Us</button><button class="btn">Email Us</button>
         </div>
     </header>
     <div class="container">
-        <h1>Join the best gym of Nanded now</h1>
+        <h1>Tree Management System</h1>
         <form action="notation php">
             <div class="form-group">
-                <input type="text" name="" placeholder="Enter your Name">
-                <input type="text" name="" placeholder="Enter your Age">
-                <input type="text" name="" placeholder="Enter your Gender">
-                <input type="text" name="" placeholder="Enter your Locality">
-                <input type="text" name="" placeholder="Enter your Email">
-                <input type="text" name="" placeholder="Enter your Mobile Number">
+                <input type="text" name="" placeholder="Email">
+                <input type="text" name="" placeholder="Password">
             </div>
             <button class="btn">submit</button>
+            <a href="https://www.facebook.com/" target="_blank" class="recovery">Recovery Email</a>
+            <a href="" target="_blank" class="recovery">Setup Password</a>
         </form>
+
+        <h1 class="text-info text-center">Profile</h1>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <img id="imagePreview" alt="jhvhyufvhvuyv">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <h3 class="text-warning">
+                                Image Upload
+                            </h3>
+                            <input type="file" id="image" name="filename">
+                        </div>
+                        <div class="row">
+                            <h3 class="text-warning">
+                                Description
+                            </h3>
+                            <textarea id="des"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn" onclick="saveFile()">submit</button> 
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        let imageUrl;
+        let eachSubmit;
+        document.querySelector('#image').addEventListener('change', function(){
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                    imageUrl = reader.result; 
+                });
+                reader.readAsDataURL(this.files[0]);
+            });
+        function saveProfile()
+        {
+            var des=document.getElementById('des').value;
+
+            let profile={
+                description:des , 
+                image: imageUrl
+            }
+            console.log(profile)
+            localStorage.setItem("profile_data",JSON.stringify(profile))
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const recentImage = localStorage.getItem('profile_data');
+
+            if(recentImage){
+                document.querySelector('#imagePreview').setAttribute("src", recentImage);
+            }
+        })
+    </script>
 </body>
 </html>
